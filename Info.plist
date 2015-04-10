@@ -2,8 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-<!--	<key>CFBundleIcon</key>
-	<string>Icon_512x512.png</string> -->
+	<key>CFBundleIcon</key>
+	<string>Icon_512x512.png</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleSignature</key>
@@ -13,7 +13,7 @@
 	<key>CFBundleGetInfoString</key>
 	<string>Made by a meandering fool</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.phoenix-dev.setresx</string>
+	<string>net.alkalay.RDM</string>
 	<key>CFBundleName</key>
 	<string>SetResX</string>
 	<key>LSUIElement</key>
