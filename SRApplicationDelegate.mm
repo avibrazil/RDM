@@ -142,11 +142,11 @@
 			{
 				if([mainItem scale] == 2.0f)
 				{
-					title = [NSString stringWithFormat: @"%d x %d (HiDPI)", [mainItem width], [mainItem height]];
+					title = [NSString stringWithFormat: @"%d × %d ⚡️️", [mainItem width], [mainItem height]];
 				}
 				else
 				{
-					title = [NSString stringWithFormat: @"%d x %d", [mainItem width], [mainItem height]];
+					title = [NSString stringWithFormat: @"%d × %d", [mainItem width], [mainItem height]];
 				}
 			}
 			

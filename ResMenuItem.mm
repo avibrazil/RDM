@@ -32,22 +32,22 @@
 		{
 			if(refreshRate)
 			{
-				title = [NSString stringWithFormat: @"%d x %d (HiDPI), %.0f Hz", width, height, refreshRate];
+				title = [NSString stringWithFormat: @"%d × %d ⚡️, %.0f Hz", width, height, refreshRate];
 			}
 			else
 			{
-				title = [NSString stringWithFormat: @"%d x %d (HiDPI)", width, height];
+				title = [NSString stringWithFormat: @"%d × %d ⚡️", width, height];
 			}
 		}
 		else
 		{
 			if(refreshRate)
 			{
-				title = [NSString stringWithFormat: @"%d x %d, %.0f Hz", width, height, refreshRate];
+				title = [NSString stringWithFormat: @"%d × %d, %.0f Hz", width, height, refreshRate];
 			}
 			else
 			{
-				title = [NSString stringWithFormat: @"%d x %d", width, height];
+				title = [NSString stringWithFormat: @"%d × %d", width, height];
 			}
 		}
 		[self setTitle: title];
@@ -67,11 +67,11 @@
 	{
 		if(scale == 2.0f)
 		{
-			title = [NSString stringWithFormat: @"%d x %d (HiDPI)", width, height];
+			title = [NSString stringWithFormat: @"%d × %d ⚡", width, height];
 		}
 		else
 		{
-			title = [NSString stringWithFormat: @"%d x %d", width, height];
+			title = [NSString stringWithFormat: @"%d × %d", width, height];
 		}
 	}
 	
@@ -124,18 +124,18 @@
 - (NSComparisonResult) compareResMenuItem: (ResMenuItem*) otherItem
 {
 	{
-		int o_scale = [otherItem scale];
-		if(scale < o_scale)
-			return NSOrderedDescending;
-		else if(scale > o_scale)
-			return NSOrderedAscending;
-//		return NSOrderedSame;
-	}
-	{
 		int o_width = [otherItem width];
 		if(width < o_width)
 			return NSOrderedDescending;
 		else if(width > o_width)
+			return NSOrderedAscending;
+//		return NSOrderedSame;
+	}
+	{
+		int o_scale = [otherItem scale];
+		if(scale < o_scale)
+			return NSOrderedDescending;
+		else if(scale > o_scale)
 			return NSOrderedAscending;
 //		return NSOrderedSame;
 	}
