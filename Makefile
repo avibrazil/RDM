@@ -15,7 +15,7 @@ RDM.app: SetResX Resources Info.plist monitor.icns
 	mkdir -p RDM.app/Contents/MacOS/
 	cp SetResX RDM.app/Contents/MacOS/
 	cp -r Info.plist Resources RDM.app/Contents
-	cp -r monitor.icns RDM.app/Contents/Resources
+	mv monitor.icns RDM.app/Contents/Resources
 
 
 SetResX: main.o SRApplicationDelegate.o ResMenuItem.o cmdline.o utils.o 
@@ -36,13 +36,6 @@ clean:
 
 %.icns: %.png
 	sips -s format icns $< --out $@
-
-SwitchResolution.app: SwitchResolution.applescript resolution.icns
-	osacompile -o $@ $<
-	mv resolution.icns $@/Contents/Resources/applet.icns
-
-version.h:
-	sed -e "s/@VERSION@/\"$(VERSION)\"/" < version-tmpl.h > version.h
 
 pkg: RDM.app
 	mkdir -p pkgroot/Applications
