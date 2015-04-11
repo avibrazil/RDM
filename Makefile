@@ -3,7 +3,7 @@
 PREFIX=/usr
 IDENTIFIER=net.alkalay.RDM
 
-VERSION=2.0
+VERSION=2.1
 
 CC=llvm-g++
 PACKAGE_BUILD=/usr/bin/pkgbuild
@@ -11,10 +11,11 @@ ARCH_FLAGS=-arch x86_64
 
 .PHONY: build
 
-RDM.app: SetResX Resources Info.plist
+RDM.app: SetResX Resources Info.plist monitor.icns
 	mkdir -p RDM.app/Contents/MacOS/
 	cp SetResX RDM.app/Contents/MacOS/
 	cp -r Info.plist Resources RDM.app/Contents
+	cp -r monitor.icns RDM.app/Contents/Resources
 
 
 SetResX: main.o SRApplicationDelegate.o ResMenuItem.o cmdline.o utils.o 
@@ -24,6 +25,7 @@ SetResX: main.o SRApplicationDelegate.o ResMenuItem.o cmdline.o utils.o
 clean:
 	rm -f SetResX
 	rm -f *.o
+	rm -f *icns
 	rm -rf RDM.app
 	rm -rf pkgroot dmgroot
 	rm -f *.pkg *.dmg
@@ -31,9 +33,6 @@ clean:
 %.o: %.mm
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(ARCH_FLAGS) $< -c -o $@
 
-
-screenresolution: main.o cg_utils.o
-	$(CC) $(CPPFLAGS) $(CFLAGS) $(ARCH_FLAGS) -framework Foundation -framework ApplicationServices $^ -o $@
 
 %.icns: %.png
 	sips -s format icns $< --out $@
