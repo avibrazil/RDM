@@ -256,14 +256,15 @@
 //	NSLog(@"Finished launching");
 	statusItem = [[[NSStatusBar systemStatusBar] statusItemWithLength: NSSquareStatusItemLength] retain];
 	
-	NSImage* statusImage = [NSImage imageNamed: @"StatusIcon.png"];
+	NSImage* statusImage = [NSImage imageNamed: @"StatusIcon"];
 	[statusItem setImage: statusImage];
-	
-	NSImage* statusImage_selected = [NSImage imageNamed: @"StatusIcon_sel.png"];
-	[statusItem setAlternateImage: statusImage_selected];
-	
 	[statusItem setHighlightMode: YES];
-	
+
+  BOOL supportsDarkMenu = !(floor(NSAppKitVersionNumber) < 1343);  // NSAppKitVersionNumber10_10
+  if (supportsDarkMenu) {
+    [[statusItem image] setTemplate:YES];
+  }
+
 	[self refreshStatusMenu];
 	
 }
