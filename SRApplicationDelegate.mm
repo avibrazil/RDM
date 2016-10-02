@@ -17,21 +17,8 @@
 
 - (void) showAbout
 {
-	NSString* credits_str = @"This program is provided for free and without any warranty or support.  By using this software, you agree to not hold us liable for any loss or damage.";
-	NSAttributedString* credits = [[[NSAttributedString alloc] initWithString: credits_str] autorelease];
-	NSImage* icon = [NSImage imageNamed: @"Icon_512x512.png"];
-	NSDictionary* options = [NSDictionary dictionaryWithObjectsAndKeys:
-			credits, @"Credits",
-			@"Retina DisplayMenu", @"ApplicationName",
-			@"Beta", @"Version",
-			icon, @"ApplicationIcon",
-			@"Retina DisplayMenu v0.2", @"ApplicationVersion",
-			@"Copyright 2012, Paul Griffin.\nwww.phoenix-dev.com", @"Copyright",
-			nil];
-	
-	[NSApp orderFrontStandardAboutPanelWithOptions: options];
-				
-	
+  [NSApp activateIgnoringOtherApps:YES];
+  [NSApp orderFrontStandardAboutPanel:self];
 }
 
 
