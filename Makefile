@@ -3,7 +3,7 @@
 PREFIX=/usr
 IDENTIFIER=net.alkalay.RDM
 
-VERSION=2.1
+VERSION=2.2
 
 CC=llvm-g++
 PACKAGE_BUILD=/usr/bin/pkgbuild
