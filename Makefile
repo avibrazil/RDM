@@ -44,7 +44,7 @@ pkg: RDM.app
 	mkdir -p pkgroot/Applications
 	mv $< pkgroot/Applications/
 	$(PACKAGE_BUILD) --root pkgroot/  --identifier $(IDENTIFIER) \
-		--version $(VERSION) "RDM-$(VERSION).pkg" 
+		--version $(VERSION) "RDM-$(VERSION).pkg"
 	rm -f RDM.pkg
 	ln -s RDM-$(VERSION).pkg RDM.pkg
 
