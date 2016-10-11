@@ -3,7 +3,7 @@
 PREFIX=/usr
 IDENTIFIER=net.alkalay.RDM
 
-VERSION=2.1
+VERSION=2.2
 
 CC=llvm-g++
 PACKAGE_BUILD=/usr/bin/pkgbuild
@@ -15,6 +15,9 @@ RDM.app: SetResX Resources Info.plist monitor.icns
 	mkdir -p RDM.app/Contents/MacOS/
 	cp SetResX RDM.app/Contents/MacOS/
 	cp -r Info.plist Resources RDM.app/Contents
+	rm RDM.app/Contents/Resources/Icon_512x512.png
+	rm RDM.app/Contents/Resources/StatusIcon_sel.png
+	rm RDM.app/Contents/Resources/StatusIcon_sel@2x.png
 	mv monitor.icns RDM.app/Contents/Resources
 
 
@@ -41,7 +44,7 @@ pkg: RDM.app
 	mkdir -p pkgroot/Applications
 	mv $< pkgroot/Applications/
 	$(PACKAGE_BUILD) --root pkgroot/  --identifier $(IDENTIFIER) \
-		--version $(VERSION) "RDM-$(VERSION).pkg" 
+		--version $(VERSION) "RDM-$(VERSION).pkg"
 	rm -f RDM.pkg
 	ln -s RDM-$(VERSION).pkg RDM.pkg
 
