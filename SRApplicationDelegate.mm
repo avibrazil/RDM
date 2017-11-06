@@ -9,6 +9,13 @@
 #import "ResMenuItem.h"
 
 
+void DisplayReconfigurationCallback(CGDirectDisplayID cg_id,
+                                    CGDisplayChangeSummaryFlags change_flags,
+                                    void *app_delegate)
+{
+    SRApplicationDelegate *appDelegate = (SRApplicationDelegate*)app_delegate;
+    [appDelegate refreshStatusMenu];
+}
 
 
 
@@ -253,7 +260,7 @@
   }
 
 	[self refreshStatusMenu];
-	
+    CGDisplayRegisterReconfigurationCallback(DisplayReconfigurationCallback, self);
 }
 
 @end
