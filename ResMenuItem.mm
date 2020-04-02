@@ -18,40 +18,54 @@
 
 		modeNum = mode->derived.mode;
 		scale = mode->derived.density;
-        
+
 		width = mode->derived.width;
 		height = mode->derived.height;
-		
+
 		refreshRate = mode->derived.freq;
-		
+
 		colorDepth = (mode->derived.depth == 4) ? 32 : 16;
-		
-		
+
+		int a = width;
+		int b = height;
+		int t;
+		while (b != 0) {
+			t = b;
+			b = a % b;
+			a = t;
+		}
+		_w = width / a;
+		_h = height / a;
+		if (_h == 5) {
+			_w *= 2;
+			_h *= 2;
+		}
+
 		NSString* title;
 		if(scale == 2.0f)
 		{
 			if(refreshRate)
 			{
-				title = [NSString stringWithFormat: @"%d × %d ⚡️, %.0f Hz", width, height, refreshRate];
+				title = [NSString stringWithFormat: @"⚡️ %d × %d — %d:%d, %.0f Hz", width, height, _w, _h, refreshRate];
 			}
 			else
 			{
-				title = [NSString stringWithFormat: @"%d × %d ⚡️", width, height];
+				title = [NSString stringWithFormat: @"⚡️ %d × %d — %d:%d", width, height, _w, _h];
 			}
 		}
 		else
 		{
 			if(refreshRate)
 			{
-				title = [NSString stringWithFormat: @"%d × %d, %.0f Hz", width, height, refreshRate];
+				title = [NSString stringWithFormat: @"%d × %d — %d:%d, %.0f Hz", width, height, _w, _h, refreshRate];
 			}
 			else
 			{
-				title = [NSString stringWithFormat: @"%d × %d", width, height];
+				title = [NSString stringWithFormat: @"%d × %d — %d:%d", width, height, _w, _h];
 			}
 		}
 		[self setTitle: title];
-	
+
 		return self;
 	}
 	else
@@ -67,23 +81,23 @@
 	{
 		if(scale == 2.0f)
 		{
-			title = [NSString stringWithFormat: @"%d × %d ⚡", width, height];
+			title = [NSString stringWithFormat: @"⚡ %d × %d — %d:%d", width, height, _w, _h];
 		}
 		else
 		{
-			title = [NSString stringWithFormat: @"%d × %d", width, height];
+			title = [NSString stringWithFormat: @"%d × %d — %d:%d", width, height, _w, _h];
 		}
 	}
-	
+
 	if(textFormat == 2)
 	{
 		title = [NSString stringWithFormat: @"%.0f Hz", refreshRate];
 	}
 	if(title)
 		[self setTitle: title];
-	
-	
-	
+
+
+
 }
 
 - (CGDirectDisplayID) display
@@ -109,6 +123,16 @@
 - (int) height
 {
 	return height;
+}
+
+- (int) _w
+{
+	return _w;
+}
+
+- (int) _h
+{
+	return _h;
 }
 
 - (float) refreshRate
