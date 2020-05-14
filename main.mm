@@ -7,7 +7,7 @@
 #import "cmdline.h"
 
 
-int main(int argc, const char* argv[])
+int main(int argc, char* argv[])
 {
 	int ret = -1;
 	if(argc > 1)
@@ -23,8 +23,8 @@ int main(int argc, const char* argv[])
 						"  --scale    (-s)  Scale (2.0 = Retina, default=current)\n"
 						"  --bits     (-b)  Color depth (default=current)\n"
 						"  --display  (-d)  Select display # (default=main)\n"
-						"  --displays (-ld) List available displays\n"
-						"  --modes    (-lm) List available modes\n"
+						"  --displays (-l) List available displays\n"
+						"  --modes    (-m) List available modes\n"
 						"\nCurrently running GUI.  Use ^C or close from menu\n");
 		
 		NSAutoreleasePool* pool = [NSAutoreleasePool new];
