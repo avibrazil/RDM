@@ -44,6 +44,7 @@ static inline CFDictionaryRef CGDisplayModeGetDictionary(CGDisplayModeRef mode) 
 - (float) scale;
 - (int) _w;
 - (int) _h;
+- (float) aspect;
 
 - (NSComparisonResult) compareResMenuItem: (ResMenuItem*) otherItem;
 

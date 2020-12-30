@@ -97,31 +97,17 @@
 				ResMenuItem* item = [displayMenuItems objectAtIndex: j];
 				if([item colorDepth] == idealColorDepth)
 				{
-					if([item refreshRate] == idealRefreshRate)
+					if (!lastAddedItem || [lastAddedItem _w] != [item _w] || [lastAddedItem _h] != [item _h])
 					{
-						[item setTextFormat: 1];
+						NSMenuItem* aspect;
+						NSString* title = [NSString stringWithFormat: @"%d:%d", [item _w], [item _h]];
+						aspect = [[NSMenuItem alloc] initWithTitle: title action: nil keyEquivalent: @""];
+						[aspect setEnabled: NO];
+						[submenu addItem: aspect];
 					}
 
-					if(lastAddedItem && [lastAddedItem width]==[item width] && [lastAddedItem height]==[item height] && [lastAddedItem scale]==[item scale])
-					{
-						double lastRefreshRate = lastAddedItem ? [lastAddedItem refreshRate] : 0;
-						double refreshRate = [item refreshRate];
-						if(!lastAddedItem || (lastRefreshRate != idealRefreshRate && (refreshRate == idealRefreshRate || refreshRate > lastRefreshRate)))
-						{
-							if(lastAddedItem)
-							{
-								[submenu removeItem: lastAddedItem];
-								lastAddedItem = nil;
-							}
-							[submenu addItem: item];
-							lastAddedItem = item;
-						}
-					}
-					else
-					{
-						[submenu addItem: item];
-						lastAddedItem = item;
-					}
+					[submenu addItem: item];
+					lastAddedItem = item;
 				}
 			}
 
@@ -129,11 +115,11 @@
 			{
 				if([mainItem scale] == 2.0f)
 				{
-					title = [NSString stringWithFormat: @"⚡️ %d × %d — %d:%d", [mainItem width], [mainItem height], [mainItem _w], [mainItem _h]];
+					title = [NSString stringWithFormat: @"⚡️ %d:%d — %d × %d", [mainItem _w], [mainItem _h], [mainItem width], [mainItem height]];
 				}
 				else
 				{
-					title = [NSString stringWithFormat: @"%d × %d — %d:%d", [mainItem width], [mainItem height], [mainItem _w], [mainItem _h]];
+					title = [NSString stringWithFormat: @"%d:%d — %d × %d", [mainItem _w], [mainItem _h], [mainItem width], [mainItem height]];
 				}
 			}
 

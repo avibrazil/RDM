@@ -46,22 +46,22 @@
 		{
 			if(refreshRate)
 			{
-				title = [NSString stringWithFormat: @"⚡️ %d × %d — %d:%d, %.0f Hz", width, height, _w, _h, refreshRate];
+				title = [NSString stringWithFormat: @"%d × %d, %.0f Hz ⚡️", width, height, refreshRate];
 			}
 			else
 			{
-				title = [NSString stringWithFormat: @"⚡️ %d × %d — %d:%d", width, height, _w, _h];
+				title = [NSString stringWithFormat: @"%d × %d ⚡️", width, height];
 			}
 		}
 		else
 		{
 			if(refreshRate)
 			{
-				title = [NSString stringWithFormat: @"%d × %d — %d:%d, %.0f Hz", width, height, _w, _h, refreshRate];
+				title = [NSString stringWithFormat: @"%d × %d, %.0f Hz", width, height, refreshRate];
 			}
 			else
 			{
-				title = [NSString stringWithFormat: @"%d × %d — %d:%d", width, height, _w, _h];
+				title = [NSString stringWithFormat: @"%d × %d", width, height];
 			}
 		}
 		[self setTitle: title];
@@ -81,11 +81,11 @@
 	{
 		if(scale == 2.0f)
 		{
-			title = [NSString stringWithFormat: @"⚡ %d × %d — %d:%d", width, height, _w, _h];
+			title = [NSString stringWithFormat: @"%d × %d ⚡", width, height];
 		}
 		else
 		{
-			title = [NSString stringWithFormat: @"%d × %d — %d:%d", width, height, _w, _h];
+			title = [NSString stringWithFormat: @"%d × %d", width, height];
 		}
 	}
 
@@ -145,8 +145,30 @@
 	return scale;
 }
 
+- (float) aspect
+{
+	return float(_w) / _h;
+}
+
 - (NSComparisonResult) compareResMenuItem: (ResMenuItem*) otherItem
 {
+	{
+		float aspect = [self aspect];
+		float o_aspect = [otherItem aspect];
+		if (aspect < o_aspect)
+			return NSOrderedAscending;
+		else if (aspect > o_aspect)
+			return NSOrderedDescending;
+//		return NSOrderedSame;			
+	}
+	{
+		int o_height = [otherItem height];
+		if(height < o_height)
+			return NSOrderedDescending;
+		else if(height > o_height)
+			return NSOrderedAscending;
+//		return NSOrderedSame;
+	}	
 	{
 		int o_width = [otherItem width];
 		if(width < o_width)
@@ -160,14 +182,6 @@
 		if(scale < o_scale)
 			return NSOrderedDescending;
 		else if(scale > o_scale)
-			return NSOrderedAscending;
-//		return NSOrderedSame;
-	}
-	{
-		int o_height = [otherItem height];
-		if(height < o_height)
-			return NSOrderedDescending;
-		else if(height > o_height)
 			return NSOrderedAscending;
 //		return NSOrderedSame;
 	}
