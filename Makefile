@@ -7,7 +7,6 @@ VERSION=2.2
 
 CC=llvm-g++
 PACKAGE_BUILD=/usr/bin/pkgbuild
-ARCH_FLAGS=-arch x86_64
 
 .PHONY: build
 
