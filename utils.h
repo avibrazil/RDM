@@ -21,14 +21,10 @@ typedef union
 	} derived;
 } modes_D4;
 
-extern "C"
-{
- 	void CGSGetCurrentDisplayMode(CGDirectDisplayID display, int* modeNum);
-	void CGSConfigureDisplayMode(CGDisplayConfigRef config, CGDirectDisplayID display, int modeNum);
-	void CGSGetNumberOfDisplayModes(CGDirectDisplayID display, int* nModes);
-	void CGSGetDisplayModeDescriptionOfLength(CGDirectDisplayID display, int idx, modes_D4* mode, int length);
-};
-
+void CGSGetCurrentDisplayMode(CGDirectDisplayID display, int* modeNum);
+void CGSConfigureDisplayMode(CGDisplayConfigRef config, CGDirectDisplayID display, int modeNum);
+void CGSGetNumberOfDisplayModes(CGDirectDisplayID display, int* nModes);
+void CGSGetDisplayModeDescriptionOfLength(CGDirectDisplayID display, int idx, modes_D4* mode, int length);
 
 void CopyAllDisplayModes(CGDirectDisplayID display, modes_D4** modes, int* cnt);
 void SetDisplayModeNum(CGDirectDisplayID display, int modeNum);

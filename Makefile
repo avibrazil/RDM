@@ -5,7 +5,7 @@ IDENTIFIER=net.alkalay.RDM
 
 VERSION=2.2
 
-CC=llvm-g++
+CFLAGS += -std=gnu99
 PACKAGE_BUILD=/usr/bin/pkgbuild
 ARCH_FLAGS=-arch x86_64
 
