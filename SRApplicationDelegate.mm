@@ -106,7 +106,9 @@
 						[submenu addItem: aspect];
 					}
 
-					[submenu addItem: item];
+					if (!lastAddedItem || [lastAddedItem width] != [item width] || [lastAddedItem height] != [item height]) {
+						[submenu addItem: item];
+					}
 					lastAddedItem = item;
 				}
 			}
