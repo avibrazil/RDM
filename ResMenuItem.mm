@@ -18,21 +18,35 @@
 
 		modeNum = mode->derived.mode;
 		scale = mode->derived.density;
-        
+
 		width = mode->derived.width;
 		height = mode->derived.height;
-		
+
 		refreshRate = mode->derived.freq;
-		
+
 		colorDepth = (mode->derived.depth == 4) ? 32 : 16;
-		
-		
+
+		int a = width;
+		int b = height;
+		int t;
+		while (b != 0) {
+			t = b;
+			b = a % b;
+			a = t;
+		}
+		_w = width / a;
+		_h = height / a;
+		if (_h == 5) {
+			_w *= 2;
+			_h *= 2;
+		}
+
 		NSString* title;
 		if(scale == 2.0f)
 		{
 			if(refreshRate)
 			{
-				title = [NSString stringWithFormat: @"%d × %d ⚡️, %.0f Hz", width, height, refreshRate];
+				title = [NSString stringWithFormat: @"%d × %d, %.0f Hz ⚡️", width, height, refreshRate];
 			}
 			else
 			{
@@ -51,7 +65,7 @@
 			}
 		}
 		[self setTitle: title];
-	
+
 		return self;
 	}
 	else
@@ -74,16 +88,16 @@
 			title = [NSString stringWithFormat: @"%d × %d", width, height];
 		}
 	}
-	
+
 	if(textFormat == 2)
 	{
 		title = [NSString stringWithFormat: @"%.0f Hz", refreshRate];
 	}
 	if(title)
 		[self setTitle: title];
-	
-	
-	
+
+
+
 }
 
 - (CGDirectDisplayID) display
@@ -111,6 +125,16 @@
 	return height;
 }
 
+- (int) _w
+{
+	return _w;
+}
+
+- (int) _h
+{
+	return _h;
+}
+
 - (float) refreshRate
 {
 	return refreshRate;
@@ -121,8 +145,30 @@
 	return scale;
 }
 
+- (float) aspect
+{
+	return float(_w) / _h;
+}
+
 - (NSComparisonResult) compareResMenuItem: (ResMenuItem*) otherItem
 {
+	{
+		float aspect = [self aspect];
+		float o_aspect = [otherItem aspect];
+		if (aspect < o_aspect)
+			return NSOrderedAscending;
+		else if (aspect > o_aspect)
+			return NSOrderedDescending;
+//		return NSOrderedSame;			
+	}
+	{
+		int o_height = [otherItem height];
+		if(height < o_height)
+			return NSOrderedDescending;
+		else if(height > o_height)
+			return NSOrderedAscending;
+//		return NSOrderedSame;
+	}	
 	{
 		int o_width = [otherItem width];
 		if(width < o_width)
@@ -136,14 +182,6 @@
 		if(scale < o_scale)
 			return NSOrderedDescending;
 		else if(scale > o_scale)
-			return NSOrderedAscending;
-//		return NSOrderedSame;
-	}
-	{
-		int o_height = [otherItem height];
-		if(height < o_height)
-			return NSOrderedDescending;
-		else if(height > o_height)
 			return NSOrderedAscending;
 //		return NSOrderedSame;
 	}
