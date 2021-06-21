@@ -20,6 +20,7 @@ int main(int argc, const char* argv[])
 		fprintf(stderr, "Commandline options\n"
 						"  --width    (-w)  Width\n"
 						"  --height   (-h)  Height\n"
+						"  --freq    (-f)  Frequency (in Hz, e.g. 30 or 60, default=not specified)\n"
 						"  --scale    (-s)  Scale (2.0 = Retina, default=current)\n"
 						"  --bits     (-b)  Color depth (default=current)\n"
 						"  --display  (-d)  Select display # (default=main)\n"
