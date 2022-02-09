@@ -7,7 +7,6 @@ VERSION=2.2
 
 CC=llvm-g++
 PACKAGE_BUILD=/usr/bin/pkgbuild
-ARCH_FLAGS=-arch x86_64
 
 .PHONY: build
 
@@ -22,7 +21,7 @@ RDM.app: SetResX Resources Info.plist monitor.icns
 
 
 SetResX: main.o SRApplicationDelegate.o ResMenuItem.o cmdline.o utils.o 
-	$(CC) $^ -o $@ $(ARCH_FLAGS) -framework Foundation -framework ApplicationServices -framework AppKit 
+	$(CC) $^ -o $@ -framework Foundation -framework ApplicationServices -framework AppKit 
 
 
 clean:
