@@ -1,4 +1,5 @@
-
+#import <CoreGraphics/CGDirectDisplay.h>
+#import <CoreGraphics/CGDisplayConfiguration.h>
 
 typedef union
 {
