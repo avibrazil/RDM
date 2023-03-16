@@ -5,9 +5,9 @@ IDENTIFIER=net.alkalay.RDM
 
 VERSION=2.2
 
-CC=llvm-g++
+CC=clang++
 PACKAGE_BUILD=/usr/bin/pkgbuild
-ARCH_FLAGS=-arch x86_64
+ARCH_FLAGS=-arch arm64
 
 .PHONY: build
 
