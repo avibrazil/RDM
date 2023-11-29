@@ -1,4 +1,5 @@
-
+#include <stdint.h>
+#include <CoreGraphics/CoreGraphics.h>
 
 typedef union
 {
